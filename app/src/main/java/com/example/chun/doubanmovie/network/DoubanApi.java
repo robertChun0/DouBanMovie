@@ -1,5 +1,6 @@
 package com.example.chun.doubanmovie.network;
 
+import com.example.chun.doubanmovie.bean.Douban_Detail;
 import com.example.chun.doubanmovie.bean.Douban_top250;
 
 import retrofit2.http.GET;
@@ -14,4 +15,7 @@ import rx.Observable;
 public interface DoubanApi {
     @GET("/v2/movie/top250")
     Observable<Douban_top250>getTop250(@Query("start") int start);
+
+    @GET("/v2/movie/subject/{id}")
+    Observable<Douban_Detail>getMovieDetail(@Path("id") int id);
 }

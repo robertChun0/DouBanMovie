@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.chun.doubanmovie.R;
 import com.example.chun.doubanmovie.bean.Douban_top250;
+import com.example.chun.doubanmovie.interfaze.OnItemClickListener;
 
 import java.util.List;
 
@@ -27,10 +28,16 @@ public class DoubanAdapter extends RecyclerView.Adapter{
     private Context mContext;
     private static final int TYPE_NORMAL=1;
     private static final int TYPE_FOOT=0;
+    private OnItemClickListener mOnItemClickListener;
     public DoubanAdapter(List<Douban_top250.SubjectsBean> datas){
         this.datas=datas;
     }
 
+
+
+    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener){
+        this.mOnItemClickListener=mOnItemClickListener;
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -39,7 +46,7 @@ public class DoubanAdapter extends RecyclerView.Adapter{
             case TYPE_NORMAL:
             {
                 View view= LayoutInflater.from(mContext).inflate(R.layout.item,parent,false);
-                return new DoubanViewHolder(view);
+                return new DoubanViewHolder(view,mOnItemClickListener);
             }
             case TYPE_FOOT: {
                 View view = LayoutInflater.from(mContext).inflate(R.layout.foot_item, parent, false);
@@ -47,7 +54,7 @@ public class DoubanAdapter extends RecyclerView.Adapter{
             }
         }
         View view= LayoutInflater.from(mContext).inflate(R.layout.item,parent,false);
-        return new DoubanViewHolder(view);
+        return new DoubanViewHolder(view,mOnItemClickListener);
     }
 
     @Override
@@ -127,9 +134,16 @@ public class DoubanAdapter extends RecyclerView.Adapter{
         TextView genres;
         @BindView(R.id.rating)
         TextView rating;
-        public DoubanViewHolder(View itemView) {
+        public DoubanViewHolder(View itemView, final OnItemClickListener mOnItemClickListener) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(mOnItemClickListener!=null)
+                    mOnItemClickListener.OnItemClick(view,getLayoutPosition());
+                }
+            });
         }
     }
 }

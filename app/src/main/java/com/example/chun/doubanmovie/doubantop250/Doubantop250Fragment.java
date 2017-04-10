@@ -1,11 +1,14 @@
 package com.example.chun.doubanmovie.doubantop250;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,8 @@ import android.widget.Toast;
 import com.example.chun.doubanmovie.R;
 import com.example.chun.doubanmovie.adapter.DoubanAdapter;
 import com.example.chun.doubanmovie.bean.Douban_top250;
+import com.example.chun.doubanmovie.details.DetailsActivity;
+import com.example.chun.doubanmovie.interfaze.OnItemClickListener;
 import com.example.chun.doubanmovie.mvp.MVPBaseFragment;
 
 import java.util.List;
@@ -29,7 +34,7 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
     @BindView(R.id.refreshLayout)
     SwipeRefreshLayout refreshLayout;
     public DoubanAdapter mDoubanAdapter;
-    public int lastVisibleItem=0;
+    private static final String TAG = "Doubantop250Fragment";
     private static Doubantop250Fragment doubantop250Fragment=new Doubantop250Fragment();
     private Doubantop250Fragment() {
     }
@@ -70,19 +75,27 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
 
         if(mDoubanAdapter!=null) {
             recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                boolean isSlidingToLast = false;
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                     super.onScrollStateChanged(recyclerView, newState);
-                    if ((newState == RecyclerView.SCROLL_STATE_IDLE)
-                            && (lastVisibleItem + 1) == mDoubanAdapter.getItemCount()) {
-                        mPresenter.loadMovie();
-                    }
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE){
+
+                      int lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPosition();
+                        int totalItemCount=mDoubanAdapter.getItemCount();
+                        if ((lastVisibleItem +1== totalItemCount )&& isSlidingToLast) {
+                            mPresenter.loadMovie();
+                        }
+
+
+
+                }
                 }
 
                 @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                     super.onScrolled(recyclerView, dx, dy);
-                    lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPosition();
+                    isSlidingToLast = dy > 0;
                 }
             });
         }
@@ -100,6 +113,14 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
     public void showError() {
         refreshLayout.setRefreshing(false);
         Toast.makeText(getContext(),R.string.error,Toast.LENGTH_SHORT).show();
+        Snackbar.make(getView(),R.string.error,Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.retry, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mPresenter.loadMovie();
+                    }
+                })
+                .show();
     }
 
     @Override
@@ -107,6 +128,14 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
         refreshLayout.setRefreshing(false);
         if(mDoubanAdapter==null){
             mDoubanAdapter=new DoubanAdapter(datas);
+            mDoubanAdapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void OnItemClick(View view, int position) {
+                    Intent intent=new Intent(getContext(),DetailsActivity.class);
+                    intent.putExtra("movie_id",mDoubanAdapter.datas.get(position).getId());
+                    startActivity(intent);
+                }
+            });
             recyclerView.setAdapter(mDoubanAdapter);
         }else{
             mDoubanAdapter.datas.addAll(datas);
