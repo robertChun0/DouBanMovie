@@ -60,9 +60,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public Fragment getItem(int position) {
                 switch (position){
                     case 0:
-                        return new Doubantop250Fragment();
+                        return Doubantop250Fragment.getInstance();
                     default:
-                        return new Doubantop250Fragment();
+                        return Doubantop250Fragment.getInstance();
                 }
             }
 

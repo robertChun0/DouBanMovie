@@ -30,6 +30,14 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
     SwipeRefreshLayout refreshLayout;
     public DoubanAdapter mDoubanAdapter;
     public int lastVisibleItem=0;
+    private static Doubantop250Fragment doubantop250Fragment=new Doubantop250Fragment();
+    private Doubantop250Fragment() {
+    }
+
+
+    public static Doubantop250Fragment getInstance(){
+        return doubantop250Fragment;
+    }
 
     @Nullable
     @Override

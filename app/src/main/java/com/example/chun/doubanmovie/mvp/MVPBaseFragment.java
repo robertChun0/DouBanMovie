@@ -24,6 +24,13 @@ public abstract class MVPBaseFragment<V extends BaseView,T extends BasePresenter
             mPresenter.detachView();
     }
 
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        if(mPresenter==null)
+//            mPresenter.attachView((V) this);
+//    }
+
     @Override
     public Context getContext() {
         return super.getContext();
