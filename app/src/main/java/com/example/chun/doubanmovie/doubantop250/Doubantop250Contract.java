@@ -1,6 +1,5 @@
-package com.example.chun.doubanmovie.douban;
+package com.example.chun.doubanmovie.doubantop250;
 
-import android.content.Context;
 
 import com.example.chun.doubanmovie.bean.Douban_top250;
 import com.example.chun.doubanmovie.mvp.BasePresenter;
@@ -9,9 +8,9 @@ import com.example.chun.doubanmovie.mvp.BaseView;
 import java.util.List;
 
 
-public class DoubanContract {
+public class Doubantop250Contract {
     interface View extends BaseView {
-       public void initView();
+        public void initView();
 
         public void refresh();
 
@@ -20,7 +19,7 @@ public class DoubanContract {
         public void loadMovie(List<Douban_top250.SubjectsBean> datas);
     }
 
-    interface  Presenter extends BasePresenter<View> {
+    interface  Presenter extends BasePresenter<Doubantop250Contract.View> {
         public void loadMovie();
     }
 }
