@@ -35,6 +35,7 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
     SwipeRefreshLayout refreshLayout;
     public DoubanAdapter mDoubanAdapter;
     private static final String TAG = "Doubantop250Fragment";
+    public int lastVisibleItem=0;
     private static Doubantop250Fragment doubantop250Fragment=new Doubantop250Fragment();
     private Doubantop250Fragment() {
     }
@@ -73,23 +74,18 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
 
         mPresenter.loadMovie();
 
-        if(mDoubanAdapter!=null) {
             recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 boolean isSlidingToLast = false;
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                     super.onScrollStateChanged(recyclerView, newState);
-                    if (newState == RecyclerView.SCROLL_STATE_IDLE){
-
-                      int lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPosition();
-                        int totalItemCount=mDoubanAdapter.getItemCount();
-                        if ((lastVisibleItem +1== totalItemCount )&& isSlidingToLast) {
+                    if (newState==RecyclerView.SCROLL_STATE_IDLE) {
+                        int totalItemCount = layoutManager.getItemCount();
+                        int lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPosition();
+                        if (lastVisibleItem == (totalItemCount - 1) && isSlidingToLast) {
                             mPresenter.loadMovie();
                         }
-
-
-
-                }
+                    }
                 }
 
                 @Override
@@ -98,7 +94,7 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
                     isSlidingToLast = dy > 0;
                 }
             });
-        }
+
 
 
     }
