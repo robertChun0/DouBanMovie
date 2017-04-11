@@ -10,10 +10,6 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-/**
- * MVPPlugin
- *  邮箱 784787081@qq.com
- */
 
 public class DoubancomingPresenter extends BasePresenterImpl<DoubancomingContract.View> implements DoubancomingContract.Presenter{
     private static final String TAG = "DoubancomingPresenter";
@@ -48,7 +44,6 @@ public class DoubancomingPresenter extends BasePresenterImpl<DoubancomingContrac
         }else {
             mView.showNoMore();
             mView.removeFootItem();
-            Log.d(TAG, "loadMovie: no more" );
         }
     }
 }

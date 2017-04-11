@@ -20,6 +20,7 @@ import com.example.chun.doubanmovie.bean.Douban_top250;
 import com.example.chun.doubanmovie.details.DetailsActivity;
 import com.example.chun.doubanmovie.interfaze.OnItemClickListener;
 import com.example.chun.doubanmovie.mvp.MVPBaseFragment;
+import com.example.chun.doubanmovie.util.ToastUtil;
 
 import java.util.List;
 
@@ -108,7 +109,6 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
     @Override
     public void showError() {
         refreshLayout.setRefreshing(false);
-        Toast.makeText(getContext(),R.string.error,Toast.LENGTH_SHORT).show();
         Snackbar.make(getView(),R.string.error,Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.retry, new View.OnClickListener() {
                     @Override
@@ -121,7 +121,8 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
 
     @Override
     public void showNoMore() {
-        Toast.makeText(getContext(),R.string.no_more,Toast.LENGTH_SHORT).show();
+        ToastUtil.showToast(getContext(),R.string.no_more);
+//        Toast.makeText(,Toast.LENGTH_SHORT).show();
     }
 
     @Override

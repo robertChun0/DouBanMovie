@@ -1,6 +1,5 @@
 package com.example.chun.doubanmovie.doubantop250;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.example.chun.doubanmovie.bean.Douban_top250;
@@ -42,7 +41,8 @@ public class Doubantop250Presenter extends BasePresenterImpl<Doubantop250Contrac
         };
 
         if(number<total){
-        Network.getDoubanApi().getTop250(number)
+        Network.getDoubanApi()
+                .getTop250(number)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);

@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.chun.doubanmovie.R;
 import com.example.chun.doubanmovie.adapter.DoubanAdapter;
@@ -19,16 +18,13 @@ import com.example.chun.doubanmovie.bean.Douban_top250;
 import com.example.chun.doubanmovie.details.DetailsActivity;
 import com.example.chun.doubanmovie.interfaze.OnItemClickListener;
 import com.example.chun.doubanmovie.mvp.MVPBaseFragment;
+import com.example.chun.doubanmovie.util.ToastUtil;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * MVPPlugin
- *  邮箱 784787081@qq.com
- */
 
 public class DoubancomingFragment extends MVPBaseFragment<DoubancomingContract.View, DoubancomingPresenter> implements DoubancomingContract.View {
 
@@ -112,7 +108,6 @@ public class DoubancomingFragment extends MVPBaseFragment<DoubancomingContract.V
     @Override
     public void showError() {
         refreshLayout.setRefreshing(false);
-        Toast.makeText(getContext(),R.string.error,Toast.LENGTH_SHORT).show();
         Snackbar.make(getView(),R.string.error,Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.retry, new View.OnClickListener() {
                     @Override
@@ -125,8 +120,9 @@ public class DoubancomingFragment extends MVPBaseFragment<DoubancomingContract.V
 
     @Override
     public void showNoMore() {
-        Toast.makeText(getContext(),R.string.no_more,Toast.LENGTH_SHORT).show();
+        ToastUtil.showToast(getContext(),R.string.no_more);
     }
+
 
     @Override
     public void loadMovie(List<Douban_top250.SubjectsBean> datas) {
@@ -146,7 +142,6 @@ public class DoubancomingFragment extends MVPBaseFragment<DoubancomingContract.V
             mDoubanAdapter.datas.addAll(datas);
             mDoubanAdapter.notifyDataSetChanged();
         }
-//        Toast.makeText(getContext(),R.string.success,Toast.LENGTH_SHORT).show();
     }
 
     @Override

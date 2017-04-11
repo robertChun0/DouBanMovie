@@ -1,18 +1,12 @@
 package com.example.chun.doubanmovie.doubancoming;
 
-import android.content.Context;
 
 import com.example.chun.doubanmovie.bean.Douban_top250;
-import com.example.chun.doubanmovie.doubantop250.Doubantop250Contract;
 import com.example.chun.doubanmovie.mvp.BasePresenter;
 import com.example.chun.doubanmovie.mvp.BaseView;
 
 import java.util.List;
 
-/**
- * MVPPlugin
- *  邮箱 784787081@qq.com
- */
 
 public class DoubancomingContract {
     interface View extends BaseView {
