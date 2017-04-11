@@ -84,8 +84,7 @@ public class DetailsActivity extends MVPBaseActivity<DetailsContract.View, Detai
 
     @Override
     public void loadData(String title, String imageUrl, String content) {
-        Log.d(TAG, "loadData: ");
-        detailToolbar.setTitle(title);
+        toolbarLayout.setTitle(title);
         Glide.with(getContext()).load(imageUrl).into(detailImage);
         detailText.setText(content);
     }
