@@ -21,6 +21,8 @@ public class DoubancomingContract {
         public void loadMovie(List<Douban_top250.SubjectsBean> datas);
 
         public void removeFootItem();
+
+        public void setLoadState();
     }
 
     interface  Presenter extends BasePresenter<DoubancomingContract.View> {

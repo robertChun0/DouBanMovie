@@ -18,10 +18,12 @@ public class Doubantop250Presenter extends BasePresenterImpl<Doubantop250Contrac
     private static int total=1;//避免一开始无法加载
     @Override
     public void loadMovie() {
+        mView.setLoadState();
         Observer<Douban_top250> observer=new Observer<Douban_top250>() {
             @Override
             public void onCompleted() {
                 Log.d(TAG, "onCompleted: ");
+                mView.setLoadState();
             }
 
             @Override
@@ -46,7 +48,9 @@ public class Doubantop250Presenter extends BasePresenterImpl<Doubantop250Contrac
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
+
         }else {
+            mView.setLoadState();
             mView.showNoMore();
             mView.removeFootItem();
         }

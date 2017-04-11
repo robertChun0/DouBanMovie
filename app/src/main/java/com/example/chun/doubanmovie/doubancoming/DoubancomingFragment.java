@@ -36,6 +36,7 @@ public class DoubancomingFragment extends MVPBaseFragment<DoubancomingContract.V
     public DoubanAdapter mDoubanAdapter;
     private static final String TAG = "DoubancomingFragment";
     public int lastVisibleItem=0;
+    private static boolean state=true;
     private static DoubancomingFragment doubancomingFragment=new DoubancomingFragment();
     private DoubancomingFragment() {
     }
@@ -82,7 +83,7 @@ public class DoubancomingFragment extends MVPBaseFragment<DoubancomingContract.V
                 if (newState==RecyclerView.SCROLL_STATE_IDLE) {
                     int totalItemCount = layoutManager.getItemCount();
                     int lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPosition();
-                    if (lastVisibleItem == (totalItemCount - 1) && isSlidingToLast) {
+                    if (lastVisibleItem == (totalItemCount - 1) && isSlidingToLast&&state) {
                         mPresenter.loadMovie();
                     }
                 }
@@ -147,5 +148,10 @@ public class DoubancomingFragment extends MVPBaseFragment<DoubancomingContract.V
     @Override
     public void removeFootItem() {
         mDoubanAdapter.notifyItemRemoved(mDoubanAdapter.getItemCount());
+    }
+
+    @Override
+    public void setLoadState() {
+        state=!state;
     }
 }

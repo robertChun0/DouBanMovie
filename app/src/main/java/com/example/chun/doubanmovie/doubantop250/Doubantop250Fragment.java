@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.chun.doubanmovie.R;
 import com.example.chun.doubanmovie.adapter.DoubanAdapter;
@@ -36,7 +35,7 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
     SwipeRefreshLayout refreshLayout;
     public DoubanAdapter mDoubanAdapter;
     private static final String TAG = "Doubantop250Fragment";
-    public int lastVisibleItem=0;
+    private static boolean state=true;
     private static Doubantop250Fragment doubantop250Fragment=new Doubantop250Fragment();
     private Doubantop250Fragment() {
     }
@@ -83,8 +82,12 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
                     if (newState==RecyclerView.SCROLL_STATE_IDLE) {
                         int totalItemCount = layoutManager.getItemCount();
                         int lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPosition();
-                        if (lastVisibleItem == (totalItemCount - 1) && isSlidingToLast) {
+                        if (lastVisibleItem == (totalItemCount - 1) && isSlidingToLast&&state) {
+                            Log.d(TAG, "onScrollStateChanged: "+state);
+//                            setLoadState();
+                            Log.d(TAG, "onScrollStateChanged: "+state);
                             mPresenter.loadMovie();
+
                         }
                     }
                 }
@@ -149,5 +152,10 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
     @Override
     public void removeFootItem() {
         mDoubanAdapter.notifyItemRemoved(mDoubanAdapter.getItemCount());
+    }
+
+    @Override
+    public void setLoadState() {
+        state=!state;
     }
 }
