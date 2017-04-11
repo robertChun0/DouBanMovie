@@ -1,6 +1,5 @@
-package com.example.chun.doubanmovie.doubantop250;
+package com.example.chun.doubanmovie.doubancoming;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.example.chun.doubanmovie.bean.Douban_top250;
@@ -11,10 +10,13 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+/**
+ * MVPPlugin
+ *  邮箱 784787081@qq.com
+ */
 
-public class Doubantop250Presenter extends BasePresenterImpl<Doubantop250Contract.View> implements Doubantop250Contract.Presenter{
-
-    private static final String TAG = "Doubantop250Presenter";
+public class DoubancomingPresenter extends BasePresenterImpl<DoubancomingContract.View> implements DoubancomingContract.Presenter{
+    private static final String TAG = "DoubancomingPresenter";
     private static int number=0;
     private static int total=1;//避免一开始无法加载
     @Override
@@ -33,23 +35,20 @@ public class Doubantop250Presenter extends BasePresenterImpl<Doubantop250Contrac
 
             @Override
             public void onNext(Douban_top250 douban_top250) {
-                Log.d(TAG, "onNext: ");
                 mView.loadMovie(douban_top250.getSubjects());
                 number+=20;
                 total=douban_top250.getTotal();
-                Log.d(TAG, "onNext: "+"total="+total+"   number="+number);
             }
         };
-
         if(number<total){
-        Network.getDoubanApi().getTop250(number)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+            Network.getDoubanApi().getComingSoon(number)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer);
         }else {
             mView.showNoMore();
             mView.removeFootItem();
+            Log.d(TAG, "loadMovie: no more" );
         }
-
     }
 }

@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.chun.doubanmovie.doubancoming.DoubancomingFragment;
 import com.example.chun.doubanmovie.doubantop250.Doubantop250Fragment;
 
 import butterknife.BindView;
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        viewPager.setOffscreenPageLimit(3);
+//        viewPager.setOffscreenPageLimit(3);
 
         viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 switch (position){
                     case 0:
                         return Doubantop250Fragment.getInstance();
+                    case 1:
+                        return DoubancomingFragment.getInstance();
                     default:
                         return Doubantop250Fragment.getInstance();
                 }
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public int getCount() {
-                return 1;
+                return 2;
             }
 
             @Override
@@ -78,6 +81,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 switch (position){
                     case 0:
                         return getString(R.string.top250);
+                    case 1:
+                        return getString(R.string.comingsoon);
                     default:
                         return getString(R.string.top250);
                 }

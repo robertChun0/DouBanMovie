@@ -18,4 +18,7 @@ public interface DoubanApi {
 
     @GET("/v2/movie/subject/{id}")
     Observable<Douban_Detail>getMovieDetail(@Path("id") int id);
+
+    @GET("/v2/movie/coming_soon")
+    Observable<Douban_top250>getComingSoon(@Query("start") int start);
 }

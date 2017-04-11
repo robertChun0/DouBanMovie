@@ -58,8 +58,8 @@
         <TextView
             android:id="@+id/detail_text"
             android:layout_margin="15dp"
-            android:text="content"
-            android:textSize="20sp"
+            android:textSize="15sp"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </android.support.v4.widget.NestedScrollView>

@@ -1,4 +1,4 @@
-package com.example.chun.doubanmovie.doubantop250;
+package com.example.chun.doubanmovie.doubancoming;
 
 
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,23 +25,28 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * MVPPlugin
+ *  邮箱 784787081@qq.com
+ */
 
-public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.View, Doubantop250Presenter> implements Doubantop250Contract.View {
+public class DoubancomingFragment extends MVPBaseFragment<DoubancomingContract.View, DoubancomingPresenter> implements DoubancomingContract.View {
+
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.refreshLayout)
     SwipeRefreshLayout refreshLayout;
     public DoubanAdapter mDoubanAdapter;
-    private static final String TAG = "Doubantop250Fragment";
+    private static final String TAG = "DoubancomingFragment";
     public int lastVisibleItem=0;
-    private static Doubantop250Fragment doubantop250Fragment=new Doubantop250Fragment();
-    private Doubantop250Fragment() {
+    private static DoubancomingFragment doubancomingFragment=new DoubancomingFragment();
+    private DoubancomingFragment() {
     }
 
 
-    public static Doubantop250Fragment getInstance(){
-        return doubantop250Fragment;
+    public static DoubancomingFragment getInstance(){
+        return doubancomingFragment;
     }
 
     @Nullable
@@ -74,26 +78,26 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
 
         mPresenter.loadMovie();
 
-            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                boolean isSlidingToLast = false;
-                @Override
-                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                    super.onScrollStateChanged(recyclerView, newState);
-                    if (newState==RecyclerView.SCROLL_STATE_IDLE) {
-                        int totalItemCount = layoutManager.getItemCount();
-                        int lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPosition();
-                        if (lastVisibleItem == (totalItemCount - 1) && isSlidingToLast) {
-                            mPresenter.loadMovie();
-                        }
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            boolean isSlidingToLast = false;
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState==RecyclerView.SCROLL_STATE_IDLE) {
+                    int totalItemCount = layoutManager.getItemCount();
+                    int lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPosition();
+                    if (lastVisibleItem == (totalItemCount - 1) && isSlidingToLast) {
+                        mPresenter.loadMovie();
                     }
                 }
+            }
 
-                @Override
-                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                    super.onScrolled(recyclerView, dx, dy);
-                    isSlidingToLast = dy > 0;
-                }
-            });
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                isSlidingToLast = dy > 0;
+            }
+        });
 
 
 

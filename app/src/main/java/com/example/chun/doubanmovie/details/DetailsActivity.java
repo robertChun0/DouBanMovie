@@ -52,6 +52,8 @@ public class DetailsActivity extends MVPBaseActivity<DetailsContract.View, Detai
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
         initView();
+
+
         Intent intent=getIntent();
         String id=intent.getStringExtra("movie_id");
         if(id==null){
