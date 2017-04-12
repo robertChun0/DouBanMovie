@@ -15,6 +15,8 @@ public class DetailsContract {
         void initView();
 
         void loadData(String title,String imageUrl,String content);
+
+        void showError();
     }
 
     interface  Presenter extends BasePresenter<View> {

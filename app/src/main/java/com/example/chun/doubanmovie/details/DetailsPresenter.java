@@ -31,6 +31,7 @@ public class DetailsPresenter extends BasePresenterImpl<DetailsContract.View> im
             @Override
             public void onError(Throwable e) {
                 Log.d(TAG, "onError: ");
+                mView.showError();
             }
 
             @Override

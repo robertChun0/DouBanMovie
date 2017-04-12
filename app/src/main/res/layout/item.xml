@@ -28,19 +28,19 @@
             <TextView
                 android:id="@+id/casts"
                 android:text="演员表"
-                android:paddingTop="10dp"
+                android:paddingTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/genres"
                 android:text="类型"
-                android:paddingTop="10dp"
+                android:paddingTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/rating"
                 android:text="评分"
-                android:paddingTop="10dp"
+                android:paddingTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

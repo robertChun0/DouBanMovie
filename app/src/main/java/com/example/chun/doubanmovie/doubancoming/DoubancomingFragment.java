@@ -134,6 +134,7 @@ public class DoubancomingFragment extends MVPBaseFragment<DoubancomingContract.V
                     }
                 })
                 .show();
+        setLoadState();
     }
 
     @Override

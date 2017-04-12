@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.chun.doubanmovie.R;
 import com.example.chun.doubanmovie.mvp.MVPBaseActivity;
+import com.example.chun.doubanmovie.util.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,7 +58,7 @@ public class DetailsActivity extends MVPBaseActivity<DetailsContract.View, Detai
         Intent intent=getIntent();
         String id=intent.getStringExtra("movie_id");
         if(id==null){
-            Toast.makeText(this,"获取id失败",Toast.LENGTH_SHORT).show();
+            showError();
         }else {
             Log.d(TAG, "onCreate: "+ id);
             int Id=Integer.parseInt(id);
@@ -87,7 +88,15 @@ public class DetailsActivity extends MVPBaseActivity<DetailsContract.View, Detai
     @Override
     public void loadData(String title, String imageUrl, String content) {
         toolbarLayout.setTitle(title);
-        Glide.with(getContext()).load(imageUrl).into(detailImage);
+        Glide.with(getContext())
+                .load(imageUrl)
+                .into(detailImage);
         detailText.setText(content);
+    }
+
+    @Override
+    public void showError() {
+        ToastUtil.showToast(this,getString(R.string.error));
+        onBackPressed();
     }
 }

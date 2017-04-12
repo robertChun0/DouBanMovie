@@ -126,6 +126,7 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
                     }
                 })
                 .show();
+        setLoadState();
     }
 
     @Override
