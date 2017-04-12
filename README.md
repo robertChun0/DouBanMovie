@@ -16,4 +16,9 @@ DouBanMovie
 |[RxAndroid](https://github.com/ReactiveX/RxAndroid)|实现异步操作的库|
 |[Gson](https://github.com/google/gson)|解析JSON|
 |[ButterKnife](https://github.com/JakeWharton/butterknife)|懒人注解库|
-|[CircleImageView](https://github.com/hdodenhof/CircleImageView)|圆形图库|
+|[CircleImageView](https://github.com/hdodenhof/CircleImageView)|圆形图库|  
+  
+  
+#演示  
+
+![gif](https://github.com/robertChun0/DouBanMovie/blob/master/1.gif)
