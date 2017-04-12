@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#007a7e</color>
     <color name="colorAccent">#007a7e</color>
     <color name="textColorPrimary">#e4dcdc</color>
+    <color name="indicatorColor">#00a8b7</color>
     <color name="refresh_1">#489f9f</color>
     <color name="refresh_2">#995eb7</color>
     <color name="refresh_3">#142e23</color>
