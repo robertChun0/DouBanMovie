@@ -13,21 +13,14 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.example.chun.doubanmovie.R;
 import com.example.chun.doubanmovie.mvp.MVPBaseActivity;
 import com.example.chun.doubanmovie.util.ToastUtil;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-/**
- * MVPPlugin
- * 邮箱 784787081@qq.com
- */
 
 public class DetailsActivity extends MVPBaseActivity<DetailsContract.View, DetailsPresenter> implements DetailsContract.View {
 

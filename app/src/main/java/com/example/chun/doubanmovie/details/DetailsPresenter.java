@@ -1,6 +1,5 @@
 package com.example.chun.doubanmovie.details;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.example.chun.doubanmovie.bean.Douban_Detail;
@@ -11,10 +10,6 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-/**
- * MVPPlugin
- *  邮箱 784787081@qq.com
- */
 
 public class DetailsPresenter extends BasePresenterImpl<DetailsContract.View> implements DetailsContract.Presenter{
     private static final String TAG = "DetailsPresenter";

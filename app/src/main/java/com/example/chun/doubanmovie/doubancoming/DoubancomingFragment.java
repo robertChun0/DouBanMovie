@@ -85,12 +85,6 @@ public class DoubancomingFragment extends MVPBaseFragment<DoubancomingContract.V
 
         refreshLayout.setColorSchemeResources(R.color.refresh_1,R.color.refresh_2,R.color.refresh_3);
 
-//        refreshLayout.setRefreshing(true);
-//
-//        mPresenter.loadMovie();
-
- //           refresh();
-
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             boolean isSlidingToLast = false;
             @Override
@@ -129,7 +123,6 @@ public class DoubancomingFragment extends MVPBaseFragment<DoubancomingContract.V
                 .setAction(R.string.retry, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        mPresenter.loadMovie();
                         refresh();
                     }
                 })
