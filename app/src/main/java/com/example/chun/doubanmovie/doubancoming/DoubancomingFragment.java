@@ -37,6 +37,7 @@ public class DoubancomingFragment extends MVPBaseFragment<DoubancomingContract.V
     private static final String TAG = "DoubancomingFragment";
     public int lastVisibleItem=0;
     private static boolean state=true;
+    private static boolean isInit=false;
     private static DoubancomingFragment doubancomingFragment=new DoubancomingFragment();
     private DoubancomingFragment() {
     }
@@ -44,6 +45,19 @@ public class DoubancomingFragment extends MVPBaseFragment<DoubancomingContract.V
 
     public static DoubancomingFragment getInstance(){
         return doubancomingFragment;
+    }
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        if (isVisibleToUser) //懒加载
+        {
+            if(!isInit) {
+                refresh();
+                isInit=true;
+            }
+        }
+        super.setUserVisibleHint(isVisibleToUser);
     }
 
     @Nullable
@@ -71,9 +85,11 @@ public class DoubancomingFragment extends MVPBaseFragment<DoubancomingContract.V
 
         refreshLayout.setColorSchemeResources(R.color.refresh_1,R.color.refresh_2,R.color.refresh_3);
 
-        refreshLayout.setRefreshing(true);
+//        refreshLayout.setRefreshing(true);
+//
+//        mPresenter.loadMovie();
 
-        mPresenter.loadMovie();
+ //           refresh();
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             boolean isSlidingToLast = false;
@@ -113,7 +129,8 @@ public class DoubancomingFragment extends MVPBaseFragment<DoubancomingContract.V
                 .setAction(R.string.retry, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mPresenter.loadMovie();
+//                        mPresenter.loadMovie();
+                        refresh();
                     }
                 })
                 .show();
@@ -122,6 +139,9 @@ public class DoubancomingFragment extends MVPBaseFragment<DoubancomingContract.V
     @Override
     public void showNoMore() {
         ToastUtil.showToast(getContext(),R.string.no_more);
+        if (refreshLayout.isRefreshing()){
+            refreshLayout.setRefreshing(false);
+        }
     }
 
 

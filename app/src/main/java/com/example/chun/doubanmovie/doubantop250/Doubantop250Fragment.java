@@ -45,6 +45,9 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
         return doubantop250Fragment;
     }
 
+
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,9 +73,11 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
 
         refreshLayout.setColorSchemeResources(R.color.refresh_1,R.color.refresh_2,R.color.refresh_3);
 
-        refreshLayout.setRefreshing(true);
+//        refreshLayout.setRefreshing(true);
+//
+//        mPresenter.loadMovie();
 
-        mPresenter.loadMovie();
+            refresh();
 
             recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 boolean isSlidingToLast = false;
@@ -116,7 +121,8 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
                 .setAction(R.string.retry, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mPresenter.loadMovie();
+//                        mPresenter.loadMovie();
+                        refresh();
                     }
                 })
                 .show();
@@ -125,6 +131,9 @@ public class Doubantop250Fragment extends MVPBaseFragment<Doubantop250Contract.V
     @Override
     public void showNoMore() {
         ToastUtil.showToast(getContext(),R.string.no_more);
+        if (refreshLayout.isRefreshing()){
+            refreshLayout.setRefreshing(false);
+        }
 //        Toast.makeText(,Toast.LENGTH_SHORT).show();
     }
 
